@@ -4,6 +4,7 @@ import com.project.demo.logic.entity.category.Category;
 import com.project.demo.logic.entity.category.CategoryRepository;
 import com.project.demo.logic.entity.http.GlobalResponseHandler;
 import com.project.demo.logic.entity.http.Meta;
+import com.project.demo.logic.entity.product.ProductRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,9 @@ public class CategoryRestController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @GetMapping
     @PreAuthorize("isAuthenticated()")
@@ -85,13 +89,19 @@ public class CategoryRestController {
     @PreAuthorize("hasRole('SUPER_ADMIN')")
     public ResponseEntity<?> deleteCategory(@PathVariable Long categoryId, HttpServletRequest request) {
         Optional<Category> foundCategory = categoryRepository.findById(categoryId);
-        if (foundCategory.isPresent()) {
-            categoryRepository.deleteById(categoryId);
-            return new GlobalResponseHandler().handleResponse("Category deleted successfully",
-                    foundCategory.get(), HttpStatus.OK, request);
-        } else {
+        if (foundCategory.isEmpty()) {
             return new GlobalResponseHandler().handleResponse("Category id " + categoryId + " not found",
                     HttpStatus.NOT_FOUND, request);
         }
+
+        if (productRepository.existsByCategoryId(categoryId)) {
+            return new GlobalResponseHandler().handleResponse(
+                    "Category id " + categoryId + " cannot be deleted because it has products assigned",
+                    HttpStatus.CONFLICT, request);
+        }
+
+        categoryRepository.deleteById(categoryId);
+        return new GlobalResponseHandler().handleResponse("Category deleted successfully",
+                foundCategory.get(), HttpStatus.OK, request);
     }
 }
