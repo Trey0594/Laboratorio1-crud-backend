@@ -23,7 +23,7 @@ API REST con CRUD de **Productos** y **Categorías**, desarrollada con Spring Bo
 
 ## Permisos
 - **Consultar** productos y categorías: cualquier usuario autenticado.
-- **Registrar, actualizar y borrar**: solo `SUPER_ADMIN`.
+- **Registrar, actualizar y borrar**: solo `SUPER_ADMIN_ROLE`.
 
 ## Pruebas
 Importar en Postman el archivo `Laboratorio1-CRUD-Backend.postman_collection.json` (en la raíz del repositorio) y ejecutar las peticiones en orden, empezando por la carpeta **Auth**.

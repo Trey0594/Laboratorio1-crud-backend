@@ -1,10 +1,10 @@
 {
   "info": {
-    "_postman_id": "a9aff7e7-99e6-45b0-b9ed-55eaf36767f3",
+    "_postman_id": "accf78c4-d53e-4426-aebc-859695987584",
     "name": "Laboratorio 1 - CRUD Backend",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "47210462",
-    "_collection_link": "https://go.postman.co/collection/47210462-a9aff7e7-99e6-45b0-b9ed-55eaf36767f3?source=collection_link"
+    "_collection_link": "https://go.postman.co/collection/47210462-accf78c4-d53e-4426-aebc-859695987584?source=collection_link"
   },
   "item": [
     {
@@ -484,7 +484,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "   pm.collectionVariables.set(\"productCategoryId\", pm.response.json().data.id);"
+                  ""
                 ]
               }
             }
@@ -531,7 +531,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "   pm.collectionVariables.set(\"productCategoryId\", pm.response.json().data.id);"
+                  ""
                 ]
               }
             }
@@ -569,7 +569,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "   pm.collectionVariables.set(\"productCategoryId\", pm.response.json().data.id);"
+                  ""
                 ]
               }
             }

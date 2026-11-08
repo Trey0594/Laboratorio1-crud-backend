@@ -61,7 +61,7 @@ public class ProductRestController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize(" hasAuthority('SUPER-ADMIN-ROLE')")
     public ResponseEntity<?> createProduct(@RequestBody Product product, HttpServletRequest request) {
         if (product.getCategory() == null || product.getCategory().getId() == null) {
             return new GlobalResponseHandler().handleResponse("Category id is required",
@@ -82,7 +82,7 @@ public class ProductRestController {
     }
 
     @PutMapping("/{productId}")
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize(" hasAuthority('SUPER-ADMIN-ROLE')")
     public ResponseEntity<?> updateProduct(@PathVariable Long productId, @RequestBody Product product,
                                            HttpServletRequest request) {
         Optional<Product> foundProduct = productRepository.findById(productId);
@@ -116,7 +116,7 @@ public class ProductRestController {
     }
 
     @DeleteMapping("/{productId}")
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize(" hasAuthority('SUPER-ADMIN-ROLE')")
     public ResponseEntity<?> deleteProduct(@PathVariable Long productId, HttpServletRequest request) {
         Optional<Product> foundProduct = productRepository.findById(productId);
         if (foundProduct.isPresent()) {

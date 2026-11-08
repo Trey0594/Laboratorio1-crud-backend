@@ -60,7 +60,7 @@ public class CategoryRestController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize(" hasAuthority('SUPER-ADMIN-ROLE')")
     public ResponseEntity<?> createCategory(@RequestBody Category category, HttpServletRequest request) {
         Category savedCategory = categoryRepository.save(category);
         return new GlobalResponseHandler().handleResponse("Category created successfully",
@@ -68,7 +68,7 @@ public class CategoryRestController {
     }
 
     @PutMapping("/{categoryId}")
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize(" hasAuthority('SUPER-ADMIN-ROLE')")
     public ResponseEntity<?> updateCategory(@PathVariable Long categoryId, @RequestBody Category category,
                                             HttpServletRequest request) {
         Optional<Category> foundCategory = categoryRepository.findById(categoryId);
@@ -86,7 +86,7 @@ public class CategoryRestController {
     }
 
     @DeleteMapping("/{categoryId}")
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize(" hasAuthority('SUPER-ADMIN-ROLE')")
     public ResponseEntity<?> deleteCategory(@PathVariable Long categoryId, HttpServletRequest request) {
         Optional<Category> foundCategory = categoryRepository.findById(categoryId);
         if (foundCategory.isEmpty()) {
